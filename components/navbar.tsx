@@ -1,50 +1,47 @@
 'use client'
-import { use } from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useState, useEffect } from 'react';
+import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 
-function navbar() {
+function NavbarComponent() {
+    const [scrolled, setScrolled] = useState(false);
+
+   
+    useEffect(() => {
+        const onScroll = () => {
+            if (window.scrollY > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        }
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [])
+
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
-            <Container fluid>
-                <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll"></Navbar.Toggle>
+        <Navbar 
+            expand="lg" 
+            fixed="top" 
+            className={scrolled ? "navbar-custom py-2" : "bg-transparent py-3"}
+            data-bs-theme={scrolled ? "light" : "dark"} // Ganti tema teks berdasarkan background
+        >
+            <Container>
+                <Navbar.Brand href="#" className="fw-bold fs-4">
+                    Aura< span className="text-primary">Fashion</span>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style = {{ maxHeight: '100px'}}
-                        navbarScroll
-                    >
-                        <Nav.Link href="#action1">Home</Nav.Link>
-                        <Nav.Link href="#action2">Home</Nav.Link>
-                        <NavDropdown title="Link" id="navbarScrollingDropDown">
-                            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                            <NavDropdown.Divider></NavDropdown.Divider>
-                            <NavDropdown.Item href="#action3">Something else here</NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link href="#" disabled>
-                            Link
-                        </Nav.Link>
-                    </Nav>    
-                    <Form className="d-flex">
-                        <Form.Control 
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        ></Form.Control>
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
+                    <Nav className="ms-auto my-2 my-lg-0 fw-medium">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="#services">Services</Nav.Link>
+                        <Nav.Link href="#work">Portfolio</Nav.Link>
+                        <Nav.Link href="#contact">Contact</Nav.Link>
+                    </Nav>
+                    <Button variant="primary" className="ms-3 rounded-pill px-4">Get Started</Button>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     )
 }
 
-export default navbar;
-
+export default NavbarComponent;

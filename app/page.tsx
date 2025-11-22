@@ -3,53 +3,66 @@ import React from "react";
 import Image from "next/image";
 
 // Components
-import Navbar from "../components/navbar";
 import HeroSection from "../components/herosection";
 import WorkSection from "../components/worksection";
 import ServiceSection from "../components/servicesection";
 import ContactSection from "../components/contactsection";
-import Footer from "../components/footer";
 
 // Bootstrap
-import { Container } from "react-bootstrap";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Button } from "react-bootstrap";
 
- 
 export default function Home() {
   return (
-    <div>
-      <Navbar />
-      <main>
-        <HeroSection></HeroSection>
-        <Container className="my-5">
-          <Row className="my-4">
-            <Col md={6} className="align-self-center mb-3">
-              <h2>About Us</h2>
-              <h6>What We Do?</h6>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus assumenda, necessitatibus veniam vitae deleniti, quos nulla obcaecati eligendi nihil hic cum ex. Dolor ab eum dolore earum magni aut quis.
-              </p>
-              <Button variant="info">Learn More</Button>
-            </Col>
-            <Col md={6}>
-              <p>
-                <Image src="/images/about.jpg" alt="About Us" width={500}
-                height={500}></Image>
-              </p>
-            </Col>
-          </Row>
-        </Container>
-        <section className="bg-dark">
-          <WorkSection></WorkSection>
-        </section>
-        <ServiceSection></ServiceSection>
-        <section id="contact">
-          <ContactSection></ContactSection>
-        </section>
-        <Footer></Footer>
-      </main>
-    </div>
+    <main>
+      <HeroSection />
+      
+      {/* About Section - Custom di Page ini */}
+      <Container className="my-5 py-5">
+        <Row className="align-items-center">
+          <Col md={6} className="mb-4 mb-md-0">
+            <div className="position-relative">
+                <Image 
+                  src="/images/slamdunk.jpeg" 
+                  alt="About Us" 
+                  width={500} 
+                  height={600} 
+                  className="img-fluid rounded-3 shadow-lg"
+                  style={{ objectFit: 'cover' }}
+                />
+                <div className="bg-primary text-white p-4 rounded position-absolute bottom-0 start-0 m-3" style={{maxWidth: '200px'}}>
+                    <h3 className="fw-bold mb-0">10+</h3>
+                    <small>Years Experience</small>
+                </div>
+            </div>
+          </Col>
+          <Col md={6}>
+            <h6 className="text-primary text-uppercase fw-bold"> Our Philosophy</h6>
+            <h2 className="display-5 fw-bold mb-4">Fashion That Speaks Before You Do</h2>
+            <p className="text-muted lead">
+              At Aura Mode, we believe style is a way to say who you are without having to speak. 
+              Founded in 2024, we bridge the gap between high-end runway trends and everyday wearability.
+            </p>
+            <p className="text-muted mb-4">
+              Every stitch tells a story of dedication, quality, and passion. Join us in our journey 
+              to make the world a more stylish place, one outfit at a time.
+            </p>
+            <Button variant="primary" size="lg" className="rounded-pill px-4">Learn More About Us</Button>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Service Section */}
+      <ServiceSection />
+
+      {/* Work Section with Dark Background */}
+      <div className="bg-dark text-white">
+        <WorkSection />
+      </div>
+
+      {/* Contact Section */}
+      <section id="contact">
+        <ContactSection />
+      </section>
+    </main>
   );
 }
